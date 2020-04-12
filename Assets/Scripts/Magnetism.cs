@@ -11,12 +11,15 @@ public class Magnetism : MonoBehaviour
 
     //Magnetic Strength of the Magnet (in Gauss)
     public float gauss;
+    //Reference to the parent objects physical properties
+    PhysicalProperties physProp;
 
     //Magnetism needs to make sure that the parent game object has a Sphere Collider that represents its Magnetic Field
     SphereCollider magneticFieldSphere;
 
     private void Start()
     {
+        physProp = GetComponent<PhysicalProperties>();
         magneticFieldSphere = GetComponent<SphereCollider>();
         ConfigureSphereCollider();
     }
@@ -36,15 +39,13 @@ public class Magnetism : MonoBehaviour
     
     private void OnTriggerStay(Collider collision)
     {
-
-
         if (collision.gameObject.GetComponent<PhysicalProperties>().isMagnetic)
         {
             //run the ExertMagneticForce method on the gameObject parent of the collision
             ExertMagneticForce(collision.gameObject);
 
             //debug
-            Debug.Log("There is a magnetic game object within magneticFieldSphere");
+            //Debug.Log("There is a magnetic game object within magneticFieldSphere");
         }
     }
 
