@@ -8,14 +8,14 @@ public class Magnetism : MonoBehaviour
 {
     ///A Class to define magnetic behavior between game objects
     ///
-
     //Magnetic Strength of the Magnet (in Gauss)
     public float gauss;
     //Reference to the parent objects physical properties
     PhysicalProperties physProp;
-
     //Magnetism needs to make sure that the parent game object has a Sphere Collider that represents its Magnetic Field
     SphereCollider magneticFieldSphere;
+    //A bool to check if a magnetic object is currently attached to a magnet
+    public bool isAttached = false;
 
     private void Start()
     {
@@ -32,8 +32,11 @@ public class Magnetism : MonoBehaviour
         Rigidbody rb = g.GetComponent<Rigidbody>();
         //face the transform of rb towards the Magnet
         rb.gameObject.transform.LookAt(transform);
+        //calculate the distance between the game object and g and store it
+        float distance = Vector3.Distance(g.transform.position, transform.position);
+
         //add force to rb in the direction it is facing
-        rb.AddForce(rb.transform.forward * gauss, ForceMode.Force);
+        rb.AddForce(rb.transform.forward * gauss * (distance * distance), ForceMode.Force);
     }
 
     
@@ -59,7 +62,7 @@ public class Magnetism : MonoBehaviour
     private void SetMagnetGaussValue()
     {
         //hard coded debug test
-        gauss = 20;
+        gauss = 2;
     }
 
     //Configures the Sphere Collider for magneticFieldSphere
@@ -68,5 +71,5 @@ public class Magnetism : MonoBehaviour
         magneticFieldSphere.isTrigger = true;
         SetMagneticFieldRadius();
         SetMagnetGaussValue();
-    }
+    }    
 }
