@@ -62,7 +62,7 @@ public class Magnetism : MonoBehaviour
     private void SetMagnetGaussValue()
     {
         //hard coded debug test
-        gauss = 2;
+        gauss = .01f;
     }
 
     //Configures the Sphere Collider for magneticFieldSphere
