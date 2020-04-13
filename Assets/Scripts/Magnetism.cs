@@ -36,7 +36,7 @@ public class Magnetism : MonoBehaviour
         float distance = Vector3.Distance(g.transform.position, transform.position);
 
         //add force to rb in the direction it is facing
-        rb.AddForce(rb.transform.forward * gauss * (distance * distance), ForceMode.Force);
+        rb.AddForce(rb.transform.forward * (gauss * (distance * distance)), ForceMode.Force);
     }
 
     
@@ -62,7 +62,7 @@ public class Magnetism : MonoBehaviour
     private void SetMagnetGaussValue()
     {
         //hard coded debug test
-        gauss = .01f;
+        gauss = .1f;
     }
 
     //Configures the Sphere Collider for magneticFieldSphere
